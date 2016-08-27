@@ -17,6 +17,11 @@ public class GameRunner{
   public void createGame(){
     createPlayers();
     this.game.createDeck(deck);
+    this.game.dealHands();
+  }
+
+  public void playTurn(int playerNumber, int cardToBePlayed){
+    this.game.playerHasPlayedCard(playerNumber, cardToBePlayed);
   }
 
   public void createPlayers(){
@@ -38,6 +43,10 @@ public class GameRunner{
 
   public int returnDeckSize(){
     return this.game.deckCount();
+  }
+
+  public int discardSize(){
+    return this.game.discardDeckLength();
   }
 
 }

@@ -23,10 +23,25 @@ public class GameRunnerTests{
     assertEquals("Player 2", gameRunner.returnPlayerName(1));
   }
 
+  //TEST BEFORE ADDING THE DEALHANDS TO MAKE SURE THAT A DECK IS BEING MADE 
+
+  // @Test
+  // public void gameHasAFullDeck(){
+  //   gameRunner.createGame();
+  //   assertEquals(52, gameRunner.returnDeckSize());
+  // }
+
   @Test
-  public void gameHasAFullDeck(){
+  public void handsHaveBeenDealt(){
     gameRunner.createGame();
-    assertEquals(52, gameRunner.returnDeckSize());
+    assertEquals(40, gameRunner.returnDeckSize());
+  }
+
+  @Test
+  public void playerHasPlayedATurn(){
+    gameRunner.createGame();
+    gameRunner.playTurn(0, 3);
+    assertEquals(1, gameRunner.discardSize());
   }
 
 }
