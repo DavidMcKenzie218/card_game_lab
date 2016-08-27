@@ -59,4 +59,15 @@ public class GameRunnerTests{
     assertEquals(46, gameRunner.deckCount());
   }
 
+  @Test
+  public void playerHasPlayedACard(){
+    gameRunner.createPlayer(playerJohn);
+    gameRunner.createDeck(deck);
+    gameRunner.dealHands();
+    gameRunner.playerHasPlayedCard(0, 2);
+    Player runnerPlayer = gameRunner.getPlayer(0);
+    assertEquals(5, runnerPlayer.handSize());
+    assertEquals(47, gameRunner.deckCount());
+  }
+
 }

@@ -39,4 +39,10 @@ public class GameRunner{
       }
     }
 
+    public void playerHasPlayedCard(int playerNumber, int cardPlayed){
+      Player playersTurn = players.get(playerNumber);
+      Card playedCard = playersTurn.playACard(cardPlayed);
+        deck.add(playedCard);
+    }
+
 }

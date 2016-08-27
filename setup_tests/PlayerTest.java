@@ -44,5 +44,12 @@ public class PlayerTest{
     assertEquals("A", card.getRank());
   }
 
+  @Test
+  public void playerHasPlayedACard(){
+    playerOne.dealPlayer(cardAce);
+    playerOne.playACard(0);
+    assertEquals(0, playerOne.handSize());
+  }
+
 
 }

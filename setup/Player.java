@@ -26,4 +26,8 @@ public class Player{
     return hand.get(handPosition);
   }
 
+  public Card playACard(int cardToBePlayed){
+    return hand.remove(cardToBePlayed);
+  }
+
 }
