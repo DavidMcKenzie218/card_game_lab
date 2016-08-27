@@ -67,7 +67,21 @@ public class GameRunnerTests{
     gameRunner.playerHasPlayedCard(0, 2);
     Player runnerPlayer = gameRunner.getPlayer(0);
     assertEquals(5, runnerPlayer.handSize());
-    assertEquals(47, gameRunner.deckCount());
+    assertEquals(46, gameRunner.deckCount());
+    assertEquals(1, gameRunner.discardDeckLength());
+  }
+
+  @Test
+  public void reAddDiscardToDeck(){
+    gameRunner.createPlayer(playerJohn);
+    gameRunner.createDeck(deck);
+    gameRunner.dealHands();
+    gameRunner.playerHasPlayedCard(0, 2);
+    gameRunner.playerHasPlayedCard(0, 2);
+    assertEquals(2, gameRunner.discardDeckLength());
+    gameRunner.addDiscardToDeck();
+    assertEquals(48, gameRunner.deckCount());
+    assertEquals(0, gameRunner.discardDeckLength());
   }
 
 }

@@ -6,6 +6,7 @@ public class GameRunner{
 
     private ArrayList<Player> players = new ArrayList<Player>();
     private ArrayList<Card> deck = new ArrayList<Card>();
+    private ArrayList<Card> discard = new ArrayList<Card>();
 
     public void createPlayer(Player player){
       this.players.add(player);
@@ -30,6 +31,14 @@ public class GameRunner{
       return deck.size();
     }
 
+    public ArrayList<Card> currentDeck(){
+      return deck;
+    }
+
+    public int discardDeckLength(){
+      return discard.size();
+    }
+
     public void dealHands(){
       for (Player player : players){
         System.out.println(player.getName());
@@ -42,7 +51,18 @@ public class GameRunner{
     public void playerHasPlayedCard(int playerNumber, int cardPlayed){
       Player playersTurn = players.get(playerNumber);
       Card playedCard = playersTurn.playACard(cardPlayed);
-        deck.add(playedCard);
+        discard.add(playedCard);
+    }
+
+    public void shuffleDiscradDeck(){
+      Collections.shuffle(discard);
+    }
+
+    public void addDiscardToDeck(){
+      shuffleDiscradDeck();
+      for (int cardNumber = 0; cardNumber <(discardDeckLength()+1); cardNumber++){
+        this.deck.add(discard.remove(0));
+      }
     }
 
 }
