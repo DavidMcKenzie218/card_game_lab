@@ -8,10 +8,8 @@ public class Deck{
   private String rank[] = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
 
   public void createDeck(){
-    for (int i = 0; i < 4; i++){
-      for (int j = 0; j <13; j++){
-        deck.add(new Card(suits[i], rank[j]));
-      }
+    for (int cardCount = 0; cardCount < 52; cardCount++){
+        deck.add(new Card(suits[cardCount/13], rank[cardCount%13]));
     }
   }
 

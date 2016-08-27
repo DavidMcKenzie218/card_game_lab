@@ -4,65 +4,40 @@ import setup.*;
 
 public class GameRunner{
 
-    private ArrayList<Player> players = new ArrayList<Player>();
-    private ArrayList<Card> deck = new ArrayList<Card>();
-    private ArrayList<Card> discard = new ArrayList<Card>();
+  private Game game;
+  private Deck deck;
 
-    public void createPlayer(Player player){
-      this.players.add(player);
-    }
+  public GameRunner(Game game, Deck deck){
+    this.game = game;
+    this.deck = deck;
+  }
 
-    public Player getPlayer(int playerNumber){
-      return players.get(playerNumber);
-    }
+  //RUN GAME
 
-    public int playerCount(){
-      return players.size();
-    }
+  public void createGame(){
+    createPlayers();
+    this.game.createDeck(deck);
+  }
 
-    public void createDeck(Deck deck){
-      ArrayList<Card> suffledDeck = deck.showDeck();
-      for (int cardNumber = 0; cardNumber <52; cardNumber++){
-        this.deck.add(suffledDeck.get(cardNumber));
-      }
+  public void createPlayers(){
+    for (int playerCount = 0; playerCount < 2; playerCount ++){
+      String playerName = String.format("Player %d", (playerCount+1));      
+      Player player = new Player(playerName);
+      this.game.createPlayer(player);
     }
+  }
 
-    public int deckCount(){
-      return deck.size();
-    }
 
-    public ArrayList<Card> currentDeck(){
-      return deck;
-    }
 
-    public int discardDeckLength(){
-      return discard.size();
-    }
+  //FOR TESTING
 
-    public void dealHands(){
-      for (Player player : players){
-        System.out.println(player.getName());
-        for (int newCard = 0; newCard < 6; newCard++){
-          player.dealPlayer(deck.remove(0));
-        }
-      }
-    }
+  public String returnPlayerName(int playerNumber){
+    Player player = game.getPlayer(playerNumber);
+    return player.getName();
+  }
 
-    public void playerHasPlayedCard(int playerNumber, int cardPlayed){
-      Player playersTurn = players.get(playerNumber);
-      Card playedCard = playersTurn.playACard(cardPlayed);
-        discard.add(playedCard);
-    }
-
-    public void shuffleDiscradDeck(){
-      Collections.shuffle(discard);
-    }
-
-    public void addDiscardToDeck(){
-      shuffleDiscradDeck();
-      for (int cardNumber = 0; cardNumber <(discardDeckLength()+1); cardNumber++){
-        this.deck.add(discard.remove(0));
-      }
-    }
+  public int returnDeckSize(){
+    return this.game.deckCount();
+  }
 
 }

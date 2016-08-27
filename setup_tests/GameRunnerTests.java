@@ -6,82 +6,27 @@ import game.*;
 public class GameRunnerTests{
 
   GameRunner gameRunner;
-  Player playerDavid;
-  Player playerJohn;
+  Game game;
   Deck deck;
 
   @Before
   public void before(){
-    gameRunner = new GameRunner();
-    playerDavid = new Player("David");
-    playerJohn = new Player("John");
+    game = new Game();
     deck = new Deck();
+    gameRunner = new GameRunner(game, deck);    
   }
 
   @Test
-  public void gameHasOnePlayer(){
-    gameRunner.createPlayer(playerDavid);
-    Player runnerPlayer = gameRunner.getPlayer(0);
-    assertEquals("David", runnerPlayer.getName());
+  public void playersHaveNames(){
+    gameRunner.createGame();
+    assertEquals("Player 1",gameRunner.returnPlayerName(0));
+    assertEquals("Player 2", gameRunner.returnPlayerName(1));
   }
 
   @Test
-  public void gameHasMultiplePlayers(){
-    gameRunner.createPlayer(playerDavid);
-    gameRunner.createPlayer(playerJohn);
-    Player runnerPlayerTwo = gameRunner.getPlayer(1);
-    assertEquals("John", runnerPlayerTwo.getName());
-  }
-
-  @Test
-  public void gameHasDeck(){
-    gameRunner.createDeck(deck);
-    assertEquals(52, gameRunner.deckCount());
-  }
-
-  @Test
-  public void playerHas6InHand(){
-    gameRunner.createPlayer(playerJohn);
-    gameRunner.createDeck(deck);
-    gameRunner.dealHands();
-    Player runnerPlayer = gameRunner.getPlayer(0);
-    assertEquals(6, runnerPlayer.handSize());
-  }
-
-  @Test
-  public void playerHas6InHandAndDeckIs6Down(){
-    gameRunner.createPlayer(playerJohn);
-    gameRunner.createDeck(deck);
-    gameRunner.dealHands();
-    Player runnerPlayer = gameRunner.getPlayer(0);
-    assertEquals(1, gameRunner.playerCount());
-    assertEquals(6, runnerPlayer.handSize());
-    assertEquals(46, gameRunner.deckCount());
-  }
-
-  @Test
-  public void playerHasPlayedACard(){
-    gameRunner.createPlayer(playerJohn);
-    gameRunner.createDeck(deck);
-    gameRunner.dealHands();
-    gameRunner.playerHasPlayedCard(0, 2);
-    Player runnerPlayer = gameRunner.getPlayer(0);
-    assertEquals(5, runnerPlayer.handSize());
-    assertEquals(46, gameRunner.deckCount());
-    assertEquals(1, gameRunner.discardDeckLength());
-  }
-
-  @Test
-  public void reAddDiscardToDeck(){
-    gameRunner.createPlayer(playerJohn);
-    gameRunner.createDeck(deck);
-    gameRunner.dealHands();
-    gameRunner.playerHasPlayedCard(0, 2);
-    gameRunner.playerHasPlayedCard(0, 2);
-    assertEquals(2, gameRunner.discardDeckLength());
-    gameRunner.addDiscardToDeck();
-    assertEquals(48, gameRunner.deckCount());
-    assertEquals(0, gameRunner.discardDeckLength());
+  public void gameHasAFullDeck(){
+    gameRunner.createGame();
+    assertEquals(52, gameRunner.returnDeckSize());
   }
 
 }
