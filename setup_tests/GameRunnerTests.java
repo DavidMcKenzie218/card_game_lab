@@ -1,19 +1,21 @@
 import static org.junit.Assert.*;
 import org.junit.*;
 import setup.*;
-import Game.*;
+import game.*;
 
 public class GameRunnerTests{
 
   GameRunner gameRunner;
   Player playerDavid;
   Player playerJohn;
+  Deck deck;
 
   @Before
   public void before(){
     gameRunner = new GameRunner();
     playerDavid = new Player("David");
     playerJohn = new Player("John");
+    deck = new Deck();
   }
 
   @Test
@@ -29,6 +31,32 @@ public class GameRunnerTests{
     gameRunner.createPlayer(playerJohn);
     Player runnerPlayerTwo = gameRunner.getPlayer(1);
     assertEquals("John", runnerPlayerTwo.getName());
+  }
+
+  @Test
+  public void gameHasDeck(){
+    gameRunner.createDeck(deck);
+    assertEquals(52, gameRunner.deckCount());
+  }
+
+  @Test
+  public void playerHas6InHand(){
+    gameRunner.createPlayer(playerJohn);
+    gameRunner.createDeck(deck);
+    gameRunner.dealHands();
+    Player runnerPlayer = gameRunner.getPlayer(0);
+    assertEquals(6, runnerPlayer.handSize());
+  }
+
+  @Test
+  public void playerHas6InHandAndDeckIs6Down(){
+    gameRunner.createPlayer(playerJohn);
+    gameRunner.createDeck(deck);
+    gameRunner.dealHands();
+    Player runnerPlayer = gameRunner.getPlayer(0);
+    assertEquals(1, gameRunner.playerCount());
+    assertEquals(6, runnerPlayer.handSize());
+    assertEquals(46, gameRunner.deckCount());
   }
 
 }

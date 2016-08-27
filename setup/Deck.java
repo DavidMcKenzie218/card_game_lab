@@ -24,6 +24,8 @@ public class Deck{
   }
 
   public ArrayList<Card> showDeck(){
+    createDeck();
+    shuffleDeck();
     return deck;
   } 
 
