@@ -41,8 +41,8 @@ public class GameRunnerTests{
   @Test
   public void playerHasPlayedATurn(){
     gameRunner.createGame(2);
-    gameRunner.playTurn(0, 1);
-    assertEquals(1, gameRunner.discardSize());
+    gameRunner.playTurn();
+    assertEquals(4, gameRunner.discardSize());
   }
 
 }

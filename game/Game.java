@@ -52,9 +52,18 @@ public class Game{
     }
 
     public void playerHasPlayedCard(int playerNumber, int cardPlayed){
-      Player playersTurn = players.get(playerNumber);
+      Player playersTurn = players.get(playerNumber);      
       Card playedCard = playersTurn.playACard(cardPlayed);
         discard.add(playedCard);
+    }
+
+    public void playerHasPlayedAllCards(int playerNumber){
+      Player playersTurn = players.get(playerNumber);
+      int handSize = playersTurn.handSize();
+      for (int card = 0; card < handSize; card++){
+       Card playedCard = playersTurn.playACard(0);
+         discard.add(playedCard);
+      }
     }
 
     public void shuffleDiscradDeck(){

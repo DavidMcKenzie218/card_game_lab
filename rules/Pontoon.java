@@ -19,8 +19,9 @@ public class Pontoon implements Rules{
 
   public String playerTurn(Game game){
     for (Player player : game.getAllPlayers()){
-      handTotals.add(totalHandTotal(player));
-    }
+      handTotals.add(totalHandTotal(player));  
+    }   
+    playerPlayedCards(game); 
     return winner(game);
   }
 
@@ -46,6 +47,17 @@ public class Pontoon implements Rules{
       return handTotal;
     }
 
+    public void playerPlayedCards(Game game){
+      for (int playerNumber = 0; playerNumber < game.playerCount(); playerNumber++){
+        // System.out.println(game.playerCount());
+        Player player = game.getPlayer(playerNumber);
+        // System.out.println(player.handSize());
+        // for (int cardNumber = 0; cardNumber < player.handSize(); cardNumber++){
+          game.playerHasPlayedAllCards(playerNumber);
+        }
+    }
+    
+
     public String winner(Game game){
       int winnerNumber = 0;
       for (int handTotalNumber = 0; handTotalNumber < totalArraySize(); handTotalNumber++){
@@ -56,7 +68,9 @@ public class Pontoon implements Rules{
       }
 
       Player winner = game.getPlayer(winnerNumber);
+      winnerNumber = 0;
       return winner.getName() + " won this round";
+
     }
 
     //FOR TESTING
@@ -65,3 +79,4 @@ public class Pontoon implements Rules{
       return handTotals.size();
     }
   }
+

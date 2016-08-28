@@ -21,14 +21,16 @@ public class GameRunner{
   public void createGame(int playerCount){
     int maxPlayers = rules.maximumNumberOfPlayers();
     int handSize = rules.numberOfCardsHand();
+
     createPlayers(maxPlayers, playerCount);
     this.game.createDeck(deck);
+    System.out.println(game.deckCount());
     this.game.dealHands(handSize);
   }
 
-  public void playTurn(int playerNumber, int cardToBePlayed){
+  public void playTurn(){
     int numberOfCardsInDeck = this.game.deckCount();   
-    this.game.playerHasPlayedCard(playerNumber, cardToBePlayed);
+    rules.playerTurn(game);
     if (numberOfCardsInDeck == 0){
       this.game.addDiscardToDeck();
     }

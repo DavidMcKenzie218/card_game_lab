@@ -15,6 +15,7 @@ public class PontoonTests{
   Card cardQueen;
   Card cardTen;
   Game game;
+  Deck deck;
 
   @Before
   public void before(){
@@ -27,6 +28,7 @@ public class PontoonTests{
     cardQueen = new Card("Hearts", "Q");
     cardTen = new Card("Hearts", "10");
     game = new Game();
+    deck = new Deck();
   }
 
   @Test
@@ -63,6 +65,7 @@ public class PontoonTests{
   public void thereAreTwoHandTotals(){
     game.createPlayer(player);
     game.createPlayer(playerTwo);
+    game.createDeck(deck);
     player.dealPlayer(cardTwo);
     player.dealPlayer(cardQueen);
     playerTwo.dealPlayer(cardAce);
@@ -81,6 +84,19 @@ public class PontoonTests{
     playerTwo.dealPlayer(cardThree);
     pontoon.playerTurn(game);
     assertEquals("David won this round", pontoon.winner(game));
+  }
+  @Test
+  public void playerDiscardsCards(){
+    game.createPlayer(player);
+    game.createPlayer(playerTwo);
+    game.createDeck(deck);
+    player.dealPlayer(cardTwo);
+    player.dealPlayer(cardQueen);
+    playerTwo.dealPlayer(cardAce);
+    playerTwo.dealPlayer(cardThree);
+    pontoon.playerTurn(game);
+    System.out.println(game.deckCount());
+    assertEquals(4, game.discardDeckLength());
   }
 
 }
