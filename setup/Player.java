@@ -22,6 +22,10 @@ public class Player{
     hand.add(card);
   }
 
+  public ArrayList<Card> getHand(){
+    return this.hand;
+  }
+
   public Card cardInHand(int handPosition){
     return hand.get(handPosition);
   }

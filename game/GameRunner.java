@@ -21,7 +21,11 @@ public class GameRunner{
   }
 
   public void playTurn(int playerNumber, int cardToBePlayed){
+    int numberOfCardsInDeck = this.game.deckCount();   
     this.game.playerHasPlayedCard(playerNumber, cardToBePlayed);
+    if (numberOfCardsInDeck == 0){
+      this.game.addDiscardToDeck();
+    }
   }
 
   public void createPlayers(){

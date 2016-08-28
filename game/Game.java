@@ -16,6 +16,10 @@ public class Game{
       return players.get(playerNumber);
     }
 
+    public ArrayList<Player> getAllPlayers(){
+      return this.players;
+    }
+
     public int playerCount(){
       return players.size();
     }
