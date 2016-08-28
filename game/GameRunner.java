@@ -2,22 +2,28 @@ package game;
 import java.util.*;
 import setup.*;
 
+import rules.*;
+
 public class GameRunner{
 
   private Game game;
   private Deck deck;
+  private Rules rules;
 
-  public GameRunner(Game game, Deck deck){
+  public GameRunner(Game game, Deck deck, Rules rules){
     this.game = game;
     this.deck = deck;
+    this.rules = rules;
   }
 
   //RUN GAME
 
-  public void createGame(){
-    createPlayers();
+  public void createGame(int playerCount){
+    int maxPlayers = rules.maximumNumberOfPlayers();
+    int handSize = rules.numberOfCardsHand();
+    createPlayers(maxPlayers, playerCount);
     this.game.createDeck(deck);
-    this.game.dealHands();
+    this.game.dealHands(handSize);
   }
 
   public void playTurn(int playerNumber, int cardToBePlayed){
@@ -28,9 +34,9 @@ public class GameRunner{
     }
   }
 
-  public void createPlayers(){
-    for (int playerCount = 0; playerCount < 2; playerCount ++){
-      String playerName = String.format("Player %d", (playerCount+1));      
+  public void createPlayers(int maxPlayers, int playerCount){
+    for (int players = 0; players < playerCount; players ++){
+      String playerName = String.format("Player %d", (players+1));      
       Player player = new Player(playerName);
       this.game.createPlayer(player);
     }

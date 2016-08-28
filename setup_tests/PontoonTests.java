@@ -71,4 +71,16 @@ public class PontoonTests{
     assertEquals(2, pontoon.totalArraySize());
   }
 
+  @Test
+  public void checkWinner__David(){
+    game.createPlayer(player);
+    game.createPlayer(playerTwo);
+    player.dealPlayer(cardTwo);
+    player.dealPlayer(cardQueen);
+    playerTwo.dealPlayer(cardAce);
+    playerTwo.dealPlayer(cardThree);
+    pontoon.playerTurn(game);
+    assertEquals("David won this round", pontoon.winner(game));
+  }
+
 }

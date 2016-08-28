@@ -17,10 +17,11 @@ public class Pontoon implements Rules{
     return 8;
   }
 
-  public void playerTurn(Game game){
+  public String playerTurn(Game game){
     for (Player player : game.getAllPlayers()){
       handTotals.add(totalHandTotal(player));
     }
+    return winner(game);
   }
 
   public int totalHandTotal(Player player){
@@ -43,6 +44,19 @@ public class Pontoon implements Rules{
       }
       }
       return handTotal;
+    }
+
+    public String winner(Game game){
+      int winnerNumber = 0;
+      for (int handTotalNumber = 0; handTotalNumber < totalArraySize(); handTotalNumber++){
+        int newTotal = handTotals.get(handTotalNumber);
+        if (newTotal > handTotals.get(winnerNumber)){
+          winnerNumber = newTotal;
+        }
+      }
+
+      Player winner = game.getPlayer(winnerNumber);
+      return winner.getName() + " won this round";
     }
 
     //FOR TESTING

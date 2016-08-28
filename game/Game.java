@@ -43,9 +43,9 @@ public class Game{
       return discard.size();
     }
 
-    public void dealHands(){
+    public void dealHands(int handSize){
       for (Player player : players){
-        for (int newCard = 0; newCard < 6; newCard++){
+        for (int newCard = 0; newCard < handSize; newCard++){
           player.dealPlayer(deck.remove(0));
         }
       }

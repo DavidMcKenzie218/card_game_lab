@@ -43,7 +43,7 @@ public class GameTests{
   public void playerHas6InHand(){
     gameRunner.createPlayer(playerJohn);
     gameRunner.createDeck(deck);
-    gameRunner.dealHands();
+    gameRunner.dealHands(6);
     Player runnerPlayer = gameRunner.getPlayer(0);
     assertEquals(6, runnerPlayer.handSize());
   }
@@ -52,7 +52,7 @@ public class GameTests{
   public void playerHas6InHandAndDeckIs6Down(){
     gameRunner.createPlayer(playerJohn);
     gameRunner.createDeck(deck);
-    gameRunner.dealHands();
+    gameRunner.dealHands(6);
     Player runnerPlayer = gameRunner.getPlayer(0);
     assertEquals(1, gameRunner.playerCount());
     assertEquals(6, runnerPlayer.handSize());
@@ -63,7 +63,7 @@ public class GameTests{
   public void playerHasPlayedACard(){
     gameRunner.createPlayer(playerJohn);
     gameRunner.createDeck(deck);
-    gameRunner.dealHands();
+    gameRunner.dealHands(6);
     gameRunner.playerHasPlayedCard(0, 2);
     Player runnerPlayer = gameRunner.getPlayer(0);
     assertEquals(5, runnerPlayer.handSize());
@@ -75,7 +75,7 @@ public class GameTests{
   public void reAddDiscardToDeck(){
     gameRunner.createPlayer(playerJohn);
     gameRunner.createDeck(deck);
-    gameRunner.dealHands();
+    gameRunner.dealHands(6);
     gameRunner.playerHasPlayedCard(0, 2);
     gameRunner.playerHasPlayedCard(0, 2);
     assertEquals(2, gameRunner.discardDeckLength());
